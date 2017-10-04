@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
-  resources :posts
-
+  resources :posts, :advertisements
+  
   get 'about' => 'welcome#about'
 
   root 'welcome#index'
