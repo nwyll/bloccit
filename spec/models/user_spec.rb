@@ -34,4 +34,18 @@ RSpec.describe User, type: :model do
     end
   end
   
+   describe "format user name" do
+     let (:user_name_not_capitalized) { User.create!(name: "bloccit user", email: "user@bloccit.com", password: "password") }
+     let (:user_first_name_not_capitalized) { User.create!(name: "bloccit User", email: "user2@bloccit.com", password: "password") }
+     let (:user_last_name_not_capitalized) { User.create!(name: "Bloccit user", email: "user3@bloccit.com", password: "password") }
+     let (:user_name_capitalized) { User.create!(name: "Bloccit User", email: "user4@bloccit.com", password: "password") }
+     
+      it "should capitalize both first and last names" do
+        expect(user_name_not_capitalized.name).to eq("Bloccit User")
+        expect(user_first_name_not_capitalized.name).to eq("Bloccit User")
+        expect(user_last_name_not_capitalized.name).to eq("Bloccit User")
+        expect(user_name_capitalized.name).to eq("Bloccit User")
+      end
+    end
+    
 end
