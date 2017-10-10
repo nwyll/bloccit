@@ -47,6 +47,8 @@ end
 
 gem 'bootstrap-sass'
 
+gem 'bcrypt'
+
 
 
 
