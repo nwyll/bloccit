@@ -75,5 +75,21 @@ RSpec.describe Post, type: :model do
         expect(post.rank).to eq(old_rank - 1)
       end
     end
+    
+    describe "after_create callback" do
+      it "triggers after_create when a post is created" do
+        post = topic.posts.new(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+        expect(post).to receive(:after_create)
+        post.save
+      end
+      
+      it "favorites the new post" do
+        
+      end
+      
+      it "sends an email to users who create the post" do
+        
+      end
+    end
   end
 end
