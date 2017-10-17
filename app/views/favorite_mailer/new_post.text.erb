@@ -1,8 +1,3 @@
-New post on "<%= @topic.name %>
-<%= "=" * (@topic.name.length + 12) %>
+You're now following "<%= @post.title %>". You will be notified of all comments made on your post. If you do not wish to recieve further notificaions, unfavorite the <%= link_to "post", topic_post_url(@post.topic, @post) %>.
 
-By: <%= @post.user.name %>
-
-<%= @post.body %>
-
-Visit online at: <% topic_post_url(@post.topic, @post, anchor: "post-#{@post.id}") %> )
+Visit online at: <% topic_post_url(@post.topic, @post, anchor: "post-#{@post.id}") %> 

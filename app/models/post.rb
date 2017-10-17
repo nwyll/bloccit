@@ -5,14 +5,14 @@ class Post < ApplicationRecord
   has_many :votes, dependent: :destroy
   has_many :favorites, dependent: :destroy
   
+  after_create :new_post_favorite
+  
   validates :title, length: { minimum: 5 }, presence: true
   validates :body, length: { minimum: 20 }, presence: true
   validates :topic, presence: true
   validates :user, presence: true
   
   default_scope { order('rank DESC') }
-  
-  after_create :new_post_favorite
   
   def up_votes
     votes.where(value: 1).count
@@ -35,10 +35,9 @@ class Post < ApplicationRecord
   private 
   
   def new_post_favorite
-    #favorite the new post for the user
-    self.favorites.create!
-    #call new_post Mailer to send email to user
-    FavoriteMailer.new_post(self.user, self, topic).deliver_now
+    Favorite.create(post: self, user: self.user)
+    
+    FavoriteMailer.new_post(self).deliver_now
   end
   
 end
