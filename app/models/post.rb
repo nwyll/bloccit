@@ -11,6 +11,7 @@ class Post < ApplicationRecord
   validates :user, presence: true
   
   default_scope { order('rank DESC') }
+  scope :visible_to, -> (user) { user ? all : joins(:topic).where('topics.public' => true) }
   
   def up_votes
     votes.where(value: 1).count
@@ -29,5 +30,4 @@ class Post < ApplicationRecord
     new_rank = points + age_in_days
     update_attribute(:rank, new_rank)
   end
-  
 end
