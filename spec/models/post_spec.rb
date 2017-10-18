@@ -75,5 +75,24 @@ RSpec.describe Post, type: :model do
         expect(post.rank).to eq(old_rank - 1)
       end
     end
+<<<<<<< Updated upstream
+=======
+    
+    describe "after_create callback" do
+      #do I need to do topic.posts.create! here, or can I just use post since its been created up top
+      it "triggers #new_post_favorite when a post is created" do
+        expect(post).to receive(:after_create)
+      end
+      
+      it "favorites the new post" do
+        expect(post.favorites).to #??? not be nil?
+      end
+      
+      it "sends an email to user who create the post" do
+        #copied this syntax from checkpoint; I did look up the spec documentation on double but it was less than illuminating
+        expect(FavoriteMailer).to receive(:new_post).with(post).and_return(double(deliver_now: true))
+      end
+    end
+>>>>>>> Stashed changes
   end
 end
