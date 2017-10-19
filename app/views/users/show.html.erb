@@ -20,7 +20,18 @@
 </div>
 
 <h2>Posts</h2>
-<%= render @user.posts %>
+<% if user_has_no_posts?(@user) %>
+  <h4><%= @user.name %> has not submitted any posts yet.</h4>
+<% else %>
+  <%= render @user.posts %>   
+<% end %>
 
 <h2>Comments</h2>
-<%= render @user.comments %>
+<% if user_has_no_posts?(@user) %>
+  <h4><%= @user.name %> has not made any yet.</h4>
+<% else %>
+  <%= render @user.comments %>
+<% end %>
+
+<h2>Favorited Posts</h2>
+<%= render partial: 'favorited_post', collection: @user.favorites %> 

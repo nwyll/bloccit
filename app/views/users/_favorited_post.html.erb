@@ -1,0 +1,17 @@
+<div class="media">
+  <% avatar_url = favorited_post.post.user.avatar_url(64) %>
+    <% if avatar_url %>
+      <div class="media-left">
+        <%= image_tag avatar_url, class: 'media-object' %>
+      </div>
+    <% end %>
+  <div class="media-body">
+    <h4 class="media-heading">
+      <%= link_to favorited_post.post.title, topic_post_path(favorited_post.post.topic, favorited_post.post) %>
+    </h4>
+    <small>
+      <%= favorited_post.post.votes.count %> Votes
+      <%= favorited_post.post.comments.count %> Comments
+    </small>
+  </div>
+</div>
